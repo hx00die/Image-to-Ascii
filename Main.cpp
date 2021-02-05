@@ -78,7 +78,7 @@ int main()
     convert2ascii(image, RGBA, width, height);
     std::cout << "Done!\n";
     char key;
-    std::cout << "press a key to close the window";
+    std::cout << "press a key and then enter to close the window. ";
     std::cin >> key;
 
     return 0;
