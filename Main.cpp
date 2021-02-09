@@ -26,17 +26,19 @@ bool load_image(std::vector<unsigned char>& image, const std::string& filename, 
 
 void convert2ascii(std::vector<unsigned char> image, const size_t &RGBA, int width, int height) {
     std::vector <char> charectors = { '@' ,'#' ,'%' ,'x' ,'o' ,';' ,':' ,',' ,'.' ,' ' };
+    float r, g, b;
+    float const scalingConstant = 255 / 9;
+    float colour;
     std::fstream file;
     file.open("image.txt", std::ios::out);
     if (file.is_open()) {
         for (int j = 0; j < height; j++) {
             for (int i = 0; i < width; i++) {
                 size_t index = RGBA * (j * width + i);
-                float const scalingConstant = 255 / 10;
-                float r = static_cast<int>(image[index + 0]) / scalingConstant;
-                float g = static_cast<int>(image[index + 1]) / scalingConstant;
-                float b = static_cast<int>(image[index + 2]) / scalingConstant;
-                float colour = r * 0.3 + g * 0.59 + b * 0.11;
+                r = static_cast<int>(image[index + 0]) / scalingConstant;
+                g = static_cast<int>(image[index + 1]) / scalingConstant;
+                b = static_cast<int>(image[index + 2]) / scalingConstant;
+                colour = r * 0.3 + g * 0.59 + b * 0.11;
                 file << charectors[(int)colour];
             }
             file << '\n';
@@ -67,9 +69,10 @@ int main()
     const size_t RGBA = 4;
     convert2ascii(image, RGBA, 100, 100);
     std::cout << "Done!\n";
-    char key;
+    
     std::cout << "Press a key and then enter to close the window. ";
-    std::cin >> key;
+    std::cin.clear(); std::cin.ignore(INT_MAX, '\n');
+    std::cin.get();
 
     return 0;
 }
