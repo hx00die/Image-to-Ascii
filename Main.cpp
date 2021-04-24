@@ -54,7 +54,6 @@ int main()
     std::cin >> filename;
 
     int width, height;
-    int fixedWidth = 100, fixedHeight = 100;
     std::vector<unsigned char> image;
     bool success = load_image(image, filename, width, height);
     if (!success)
